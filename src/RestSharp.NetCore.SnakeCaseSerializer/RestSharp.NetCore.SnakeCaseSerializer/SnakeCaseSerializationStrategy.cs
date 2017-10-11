@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace RestSharp.SnakeCaseSerializer
+namespace RestSharp.SnakeCaseSerializer.NetCore
 {
     public class SnakeCaseSerializationStrategy : PocoJsonSerializerStrategy
     {
@@ -8,7 +8,7 @@ namespace RestSharp.SnakeCaseSerializer
         {
             var sb = new StringBuilder();
 
-            for(var i = 0; i < clrPropertyName.Length; i++)
+            for (var i = 0; i < clrPropertyName.Length; i++)
             {
                 var c = clrPropertyName[i];
                 var pc = i > 0 ? clrPropertyName[i - 1] : '\0';
@@ -18,7 +18,7 @@ namespace RestSharp.SnakeCaseSerializer
                 else
                     sb.Append(char.ToLower(c));
             }
-            
+
             return sb.ToString();
         }
 

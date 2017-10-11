@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Linq;
 using NUnit.Framework;
 
-namespace RestSharp.SnakeCaseSerializer.Tests
+namespace RestSharp.SnakeCaseSerializer.NetCore.Tests
 {
     [TestFixture]
     public class SnakeCaseSerializationStrategyTests
     {
         public SnakeCaseSerializationStrategyTests()
         {
-            SimpleJson.CurrentJsonSerializerStrategy= new SnakeCaseSerializationStrategy();
+            SimpleJson.CurrentJsonSerializerStrategy = new SnakeCaseSerializationStrategy();
         }
-       
+
         [Test]
         public void Should_SerializeProperties_As_SnakeCase()
         {
