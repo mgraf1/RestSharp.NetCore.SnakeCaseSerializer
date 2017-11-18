@@ -30,8 +30,9 @@ namespace RestSharp.SnakeCaseSerializer
         {
             bool returnValue =  base.TrySerializeUnknownTypes(input, out output);
 
-            if (this.IgnoreNullProperties && output is IDictionary<string, object> obj)
+            if (this.IgnoreNullProperties && output is IDictionary<string, object>)
             {
+                IDictionary<string, object> obj = output as IDictionary<string, object>;
                 output = obj.Where(o => o.Value != null).ToDictionary(o => o.Key, o => o.Value);
             }
 
