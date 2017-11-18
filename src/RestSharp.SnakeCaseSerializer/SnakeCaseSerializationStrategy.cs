@@ -1,9 +1,13 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace RestSharp.SnakeCaseSerializer
 {
     public class SnakeCaseSerializationStrategy : PocoJsonSerializerStrategy
     {
+        public bool IgnoreNullProperties { get; set; }
+
         protected override string MapClrMemberNameToJsonFieldName(string clrPropertyName)
         {
             var sb = new StringBuilder();
@@ -20,6 +24,18 @@ namespace RestSharp.SnakeCaseSerializer
             }
             
             return sb.ToString();
+        }
+
+        protected override bool TrySerializeUnknownTypes(object input, out object output)
+        {
+            bool returnValue =  base.TrySerializeUnknownTypes(input, out output);
+
+            if (this.IgnoreNullProperties && output is IDictionary<string, object> obj)
+            {
+                output = obj.Where(o => o.Value != null).ToDictionary(o => o.Key, o => o.Value);
+            }
+
+            return returnValue;
         }
 
         private static bool ShouldPrefixUnderscore(char c, char pc)
