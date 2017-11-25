@@ -13,20 +13,20 @@ namespace RestSharp.SnakeCaseSerializer.Tests
         public void SetUp()
         {
             this._strategyUnderTest = new SnakeCaseSerializationStrategy();
-            SimpleJson.CurrentJsonSerializerStrategy = this._strategyUnderTest;
+            SimpleJson.SimpleJson.CurrentJsonSerializerStrategy = this._strategyUnderTest;
         }
 
         [TearDown]
         public void TearDown()
         {
             this._strategyUnderTest = null;
-            SimpleJson.CurrentJsonSerializerStrategy = null;
+            SimpleJson.SimpleJson.CurrentJsonSerializerStrategy = null;
         }
 
         [Test]
         public void Should_SerializeProperties_As_SnakeCase()
         {
-            var json = SimpleJson.SerializeObject(new
+            var json = SimpleJson.SimpleJson.SerializeObject(new
             {
                 Title = "Sir",
                 FirstName = "Digby",
@@ -41,7 +41,7 @@ namespace RestSharp.SnakeCaseSerializer.Tests
         [Test]
         public void Should_HandleNumbers_In_PropertyName()
         {
-            var json = SimpleJson.SerializeObject(new
+            var json = SimpleJson.SimpleJson.SerializeObject(new
             {
                 Number1Property = "test"
             });
@@ -55,7 +55,7 @@ namespace RestSharp.SnakeCaseSerializer.Tests
         {
             this._strategyUnderTest.IgnoreNullProperties = true;
 
-            var json = SimpleJson.SerializeObject(new TestData
+            var json = SimpleJson.SimpleJson.SerializeObject(new TestData
             {
                 SomeProperty = "test",
                 SomeOtherProperty = null
@@ -70,7 +70,7 @@ namespace RestSharp.SnakeCaseSerializer.Tests
         {
             this._strategyUnderTest.IgnoreNullProperties = false;
 
-            var json = SimpleJson.SerializeObject(new TestData
+            var json = SimpleJson.SimpleJson.SerializeObject(new TestData
             {
                 SomeProperty = "test",
                 SomeOtherProperty = null
